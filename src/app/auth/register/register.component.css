@@ -1,0 +1,28 @@
+.plr0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.pl0 {
+    padding-left: 0;
+}
+
+.pr0 {
+    padding-right: 0;
+}
+
+.mlr0 { 
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.float-left {
+    float: left;
+}
+
+.error-message {
+    color: red;
+    padding-top: 2px;
+    padding-left: 3px;
+    white-space: normal;
+}

@@ -1,0 +1,36 @@
+.sign-box {
+    border-radius: 10px;
+    width: 350px;
+    margin: 20px auto auto;
+    padding: 20px 0 20px 0;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .sub-head {
+    text-align: center;
+    padding-bottom: 25px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #676767;
+  }
+  
+  .sign-logo {
+    text-align: center;
+    width: 100%;
+    padding: 20px 0 0 0;
+    font-size: 24px;
+    color: #337ab7;
+  }
+  
+  .sign-box-bottom {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0 0 10px;
+  }
+
+  .mr20 {
+      margin-right: 20px;
+  }
