@@ -1,41 +1,71 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/components/common/menuitem';
+import {Component, OnInit} from '@angular/core';
+import {MenuItem} from 'primeng/components/common/menuitem';
+import {AuthService} from 'ng2-ui-auth';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
 
-  items: MenuItem[];
+    items: MenuItem[];
+    userItems: MenuItem[];
+    public user;
+
+    constructor(private authService: AuthService) {
+    }
 
     ngOnInit() {
+        this.user = this.authService.getPayload();
         this.items = [
             {
-                label: 'File',
-                items: [{
-                        label: 'New', 
-                        icon: 'pi pi-fw pi-plus',
-                        items: [
-                            {label: 'Project'},
-                            {label: 'Other'},
-                        ]
-                    },
-                    {label: 'Open'},
-                    {label: 'Quit'}
-                ]
+                label: 'Agile Retro',
+                badge: 'Agile'
             },
             {
-                label: 'Edit',
-                icon: 'pi pi-fw pi-pencil',
+                label: 'Boards',
+                routerLink: 'boards',
+                visible: this.authService.isAuthenticated()
+            },
+            {
+                label: 'Contact',
+                routerLink: 'contact'
+            },
+            {
+                label: 'About',
+                routerLink: 'about'
+            },
+            {
+                label: 'Sign Up',
+                routerLink: 'auth/register',
+                styleClass: 'user-nav-item'
+            },
+            {
+                label: 'Log in',
+                routerLink: 'auth'
+            },
+            {
+                label: 'Profile',
+                visible: false,
                 items: [
-                    {label: 'Delete', icon: 'pi pi-fw pi-trash'},
-                    {label: 'Refresh', icon: 'pi pi-fw pi-refresh'}
+                    {
+                        label: 'Change Password',
+                        routerLink: 'passwordChange'
+
+                    },
+                    {
+                        label: 'Profile',
+                        routerLink: 'profile'
+                    },
+                    {
+                        label: 'Logout',
+                        routerLink: 'auth/logout'
+                    }
                 ]
             }
         ];
-    }
-}
 
+        this.userItems = [];
+    }
 }

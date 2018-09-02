@@ -1,0 +1,10 @@
+.user-nav-item {
+    right: .25rem;
+}
+
+.ui-menubar {
+    padding: 0;
+    background-color: #000000;
+    border: 1px solid #c8c8c8;
+    color: white;
+}

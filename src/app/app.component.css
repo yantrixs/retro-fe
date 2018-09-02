@@ -1,0 +1,14 @@
+.app-div {
+    padding-top: 20px;
+}
+
+.nav-info {
+    width: 100%;
+}
+
+
+.ui-menubar {
+    padding: 0;
+    background-color: #000000 !important;
+    border: 1px solid #c8c8c8;
+}
