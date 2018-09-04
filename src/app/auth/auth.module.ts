@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RetroService} from '../service/retro.service';
 import {LoginComponent} from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import {LoginComponent} from './login/login.component';
         HttpClientModule,
         ReactiveFormsModule,
     ],
-    declarations: [LoginComponent, RegisterComponent],
+    declarations: [LoginComponent, RegisterComponent, LogoutComponent],
     providers: [RetroService]
 })
 export class AuthModule {

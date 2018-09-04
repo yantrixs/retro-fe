@@ -11,6 +11,7 @@ import {MenubarModule} from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/primeng';
 import {HomeComponent} from './home/home.component';
+import {CommonService} from './service/common.service';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,7 @@ import {HomeComponent} from './home/home.component';
         ButtonModule,
         InputTextModule
     ],
-    providers: [AuthService],
+    providers: [AuthService, CommonService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
