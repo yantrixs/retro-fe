@@ -1,3 +1,21 @@
-<p>
-  boards works!
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="board-header">Boards</div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 pull-right">
+            <p-splitButton label="Select" [model]="items"></p-splitButton>
+        </div>
+    </div>
+    <hr class="mt0"/>
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 board-title">
+            Here are your awesome boards
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 mt-3">
+            <p-dropdown [options]="retroOptions" [(ngModel)]="selectedOption" optionLabel="name"></p-dropdown>
+        </div>
+    </div>
+</div>

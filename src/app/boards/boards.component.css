@@ -1,0 +1,13 @@
+.board-header {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1f4e79;
+}
+.mt0 {
+    margin-top: 0;
+}
+
+.board-title {
+    color: #7fbe0c;
+    font-size: 24px;
+}

@@ -5,19 +5,23 @@ import {AppComponent} from './app.component';
 import {APP_ROUTES} from './app.routes';
 import {AuthService, Ng2UiAuthModule} from 'ng2-ui-auth';
 import {environment} from '../environments/environment';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {MenubarModule} from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/primeng';
 import {HomeComponent} from './home/home.component';
 import {CommonService} from './service/common.service';
+import {SpinnerService} from './service/spinner.service';
+import {ServiceInterceptor} from './service/service.interceptor';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavBarComponent,
-        HomeComponent
+        HomeComponent,
     ],
     imports: [
         Ng2UiAuthModule.forRoot({
@@ -31,9 +35,16 @@ import {CommonService} from './service/common.service';
         APP_ROUTES,
         MenubarModule,
         ButtonModule,
-        InputTextModule
+        InputTextModule,
+        FormsModule,
+        BrowserAnimationsModule
     ],
-    providers: [AuthService, CommonService],
+    providers: [AuthService, CommonService, SpinnerService, ServiceInterceptor,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ServiceInterceptor,
+            multi: true
+        }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

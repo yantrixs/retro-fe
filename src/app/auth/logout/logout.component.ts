@@ -18,7 +18,7 @@ export class LogoutComponent implements OnInit {
             .subscribe({
                 error: (err: any) => console.log(err),
                 complete: () => {
-                    this.commonService.setLogged(null);
+                    this.commonService.setLoggedUserInfo(null);
                     // this.authService
                     this.router.navigate(['']);
                 }

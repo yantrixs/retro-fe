@@ -3,5 +3,7 @@
     <app-nav-bar></app-nav-bar>
 </div>
 <div class="app-div">
-    <router-outlet></router-outlet>
+    <router-outlet>
+        <span *ngIf="showLoader" class="loading"></span>
+    </router-outlet>
 </div>
