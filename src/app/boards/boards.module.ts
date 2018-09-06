@@ -5,6 +5,8 @@ import {BOARD_ROUTES} from './board.routes';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule, SplitButtonModule} from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
+import { CreateComponent } from './create/create.component';
+import { UserBoardsComponent } from './user-boards/user-boards.component';
 
 @NgModule({
     imports: [
@@ -15,7 +17,7 @@ import {FormsModule} from '@angular/forms';
         SplitButtonModule,
         DropdownModule
     ],
-    declarations: [BoardsComponent]
+    declarations: [BoardsComponent, CreateComponent, UserBoardsComponent]
 })
 export class BoardsModule {
 }
