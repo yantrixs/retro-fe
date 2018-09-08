@@ -37,4 +37,8 @@ export class LoginComponent implements OnInit {
             });
         }
     }
+
+    public onClearForm(): void {
+        this.loginForm.reset();
+    }
 }

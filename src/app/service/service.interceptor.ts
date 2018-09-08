@@ -14,7 +14,7 @@ export class ServiceInterceptor implements HttpInterceptor {
               next: HttpHandler): Observable<HttpEvent<any>> {
         // console.log('Token is::  ', localStorage.getItem('thanvi-tech_token'));
         const headers = new HttpHeaders({
-            'Authorization': `${this.authService.getToken()}`,
+            'Authorization': `Bearer ${this.authService.getToken()}`,
             'Content-Type': 'application/json'
         });
 
@@ -25,13 +25,15 @@ export class ServiceInterceptor implements HttpInterceptor {
 
         return next.handle(clonedRequest).pipe(tap((ev: HttpEvent<any>) => {
             setTimeout(() => {
-                this.spinnerService.display(false);
-            }, 1000);
+
+            }, 5000);
             if (ev instanceof HttpResponse) {
                 console.log('processing response', ev);
+                this.spinnerService.display(false);
             }
             if (ev instanceof HttpErrorResponse) {
                 console.log('Getting Error from service :: ', ev);
+                this.spinnerService.display(false);
             }
         }));
     }

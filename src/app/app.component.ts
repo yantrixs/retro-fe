@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {SpinnerService} from './service/spinner.service';
 import {Subscription} from 'rxjs';
 
@@ -7,12 +7,12 @@ import {Subscription} from 'rxjs';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
     title = 'retro-fe';
     public showLoader: boolean;
     private loaderSubscription$: Subscription;
 
-    constructor(private ss: SpinnerService) {
+    constructor(private ss: SpinnerService, private cdRef: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
@@ -25,5 +25,9 @@ export class AppComponent implements OnInit, OnDestroy {
         if (this.loaderSubscription$) {
             this.loaderSubscription$.unsubscribe();
         }
+    }
+
+    public ngAfterViewChecked(): void {
+        this.cdRef.detectChanges();
     }
 }

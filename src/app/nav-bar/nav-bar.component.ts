@@ -4,6 +4,7 @@ import {AuthService} from 'ng2-ui-auth';
 import {Subscription} from 'rxjs';
 import {CommonService} from '../service/common.service';
 import {UserPayload} from '../app.interface';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-nav-bar',
@@ -17,7 +18,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private isUserLoggedIn = false;
     private subscription: Subscription;
 
-    constructor(private commonService: CommonService, private authService: AuthService) {
+    constructor(private commonService: CommonService, private authService: AuthService, private router: Router) {
     }
 
     ngOnInit() {
@@ -33,6 +34,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
             }
             this.items = [];
             this.refreshItems();
+            if (!this.isUserLoggedIn) {
+                this.router.navigateByUrl('');
+            }
         });
 
         this.items = [

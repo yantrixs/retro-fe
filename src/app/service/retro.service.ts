@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../app.interface';
+import {Template, User} from '../app.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -16,11 +16,15 @@ export class RetroService {
 
   public getUserInfo(token: string): Observable<User> {
     // console.log('token    =  ', `${environment.API_URL}/auth/register, ${token}`);
-    let params = new HttpParams().set('token', token);
-    return this.httpClient.get<User>(`${environment.API_URL}/auth/register`, { params: params })
+    const params = new HttpParams().set('token', token);
+    return this.httpClient.get<User>(`${environment.API_URL}/auth/register`, { params: params });
   }
 
   public completeUserRegistration(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${environment.API_URL}/auth/register`, user)
+    return this.httpClient.post<User>(`${environment.API_URL}/auth/register`, user);
+  }
+
+  public getBoardTemplates(): Observable<Array<Template>> {
+      return this.httpClient.get<Array<Template>>(`${environment.API_URL}/templates`);
   }
 }

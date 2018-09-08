@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
           console.log('Register ', error);
           this.isSubmitted = false;
         }, () => {
-          this.router.navigateByUrl('login')
+          this.router.navigateByUrl('../');
         });
       }
     }

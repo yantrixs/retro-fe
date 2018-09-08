@@ -4,15 +4,15 @@
     <form class="col-lg-12 col-md-12 col-sm-12" [formGroup]="loginForm">
       <div class="form-group">
         <label>Email</label>
-        <input type="email" class="form-control" formControlName="usernameOrEmail">
-        <small class="text text-danger" *ngIf="isSubmitted && loginForm.controls.usernameOrEmail?.errors">
+        <input type="email" class="form-control" placeholder="Enter Email" formControlName="usernameOrEmail">
+        <small class="text text-danger" *ngIf="isSubmitted && loginForm.get('usernameOrEmail')?.errors">
           Username must be at least 3 characters long.
         </small>
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" formControlName="password">
-        <small class="text text-danger" *ngIf="isSubmitted && loginForm.controls.password?.errors">
+        <input type="password" class="form-control" placeholder="Enter Password" formControlName="password">
+        <small class="text text-danger" *ngIf="isSubmitted && loginForm.get('password')?.errors">
           Password must be at least 6 characters long.
         </small>
       </div>
@@ -22,7 +22,7 @@
       </div>
     </form>
     <div class="clearfix sign-box-bottom">
-      <a class="btn-sm btn-link" [routerLink]="['/register']">
+      <a class="btn-sm btn-link" [routerLink]="['/auth/register']">
         Create New Account
       </a>
       <a class="btn btn-default btn-sm btn-link" [routerLink]="['/auth/forgot']">
