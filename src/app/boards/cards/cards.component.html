@@ -1,0 +1,49 @@
+<div class="container main-row">
+    <div class="row" *ngFor="let template of templateCollection; let i = index" [attr.data-index]="i">
+        <div class="col-lg-6 col-md-6 col-sm-6 plr0 " (click)="selectedTemplateHandler(template)">
+            <div class="main-card plr0" [ngClass]="{'selected-card': selectedTemplate?.name === template.name}">
+                <img src="assets/boards/icons/{{template.imageName}}" class="image-info">
+                <div class="col-lg-11 col-md-11 col-sm-11 card-info">
+                    <label class="card-label">{{template.name}}</label>
+                    <label class="label-description">{{template.description}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mlr-5" *ngIf="selectedTemplate?.code === 'custom'">
+        <div class="col-lg-12 col-md-12 col-sm-12" align="center">
+            <label>Customize Categories</label>
+            <!--<div class="col-lg-6 col-md-6 col-sm-6" [formGroup]="categoryForm">
+                <div *ngFor="let category of cardCategories; let i = index;" formArrayName="categories">
+                    <input placeholder="New Category" class="col-lg-5 col-md-5 col-sm-5 form-control float-left"
+                           formControlName="name">
+                    <select class="col-lg-5 col-md-5 col-sm-5 form-control" title="select color" formControlName="color">
+                        <option disabled>select color</option>
+                        <option *ngFor="let c of customColors" [value]="c.color" [ngStyle]="{'color': c.color}"
+                                [style.color]="c.colorCode">{{c.label}}
+                        </option>
+                    </select>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>-->
+            <div class="col-lg-6 col-md-6 col-sm-6" [formGroup]="categoryForm">
+                <div formArrayName="categories">
+                    <div *ngFor="let category of categoryForm.get('categories').controls; let j = index"
+                         [formGroupName]="j" class="mt5">
+                        <input placeholder="New Category" class="col-lg-5 col-md-5 col-sm-5 form-control float-left"
+                               formControlName="name" style="margin-right: 10px">
+                        <select class="col-lg-5 col-md-5 col-sm-5 form-control float-left" title="select color"
+                                formControlName="color" [style.color]="category.get('color')">
+                            <option disabled>select color</option>
+                            <option *ngFor="let c of customColors" [value]="c.color" [ngStyle]="{'color': c.color}"
+                                    [style.color]="c.colorCode">{{c.label}}
+                            </option>
+                        </select>
+                        <i class="fa fa-times fa-remove" *ngIf="categories?.length > 0" (click)="removeCategory(j)"></i>
+                    </div>
+                </div>
+                <button class="btn btn-secondary mt-15" (click)="addNewCategory()">Add New Category</button>
+            </div>
+        </div>
+    </div>
+</div>

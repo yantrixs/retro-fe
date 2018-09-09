@@ -12,6 +12,7 @@ export interface UserPayload {
 }
 
 export interface Template {
+    code: string;
     name: string;
     description: string;
     imageName: string;

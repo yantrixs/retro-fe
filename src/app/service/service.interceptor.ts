@@ -34,6 +34,8 @@ export class ServiceInterceptor implements HttpInterceptor {
             if (ev instanceof HttpErrorResponse) {
                 console.log('Getting Error from service :: ', ev);
                 this.spinnerService.display(false);
+            } else {
+                this.spinnerService.display(false);
             }
         }));
     }

@@ -5,3 +5,8 @@
     padding-left: 30px;
     padding-right: 30px;
 }
+
+.plr0 {
+    padding-left: 0;
+    padding-right: 0;
+}

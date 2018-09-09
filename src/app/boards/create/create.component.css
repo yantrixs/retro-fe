@@ -1,0 +1,49 @@
+.board-header {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1f4e79;
+}
+
+.mt0 {
+    margin-top: 0;
+}
+
+.question-circle {
+    font-size: 30px;
+    right: 12px;
+    position: absolute;
+    color: #2a52ff;
+    top: 10px;
+}
+
+.question-circle:hover {
+    color: #32b0ff;
+    cursor: pointer;
+}
+
+.board-title {
+    color: #7fbe0c;
+    font-size: 24px;
+}
+
+:host ::ng-deep .ui-listbox-list-wrapper {
+    width: 100%;
+}
+:host ::ng-deep .ui-listbox {
+    width: 100%;
+}
+:host ::ng-deep .ui-listbox-list {
+    width: 100%;
+}
+
+.float-content {
+    float: left;
+}
+
+.btn-group-create {
+    margin: 20px 0;
+}
+
+.crete-btn {
+    margin-right: 10px;
+}
