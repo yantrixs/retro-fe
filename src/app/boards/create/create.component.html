@@ -8,22 +8,31 @@
             <hr class="mt0"/>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-            <label class="board-title">Enter a board title</label>
-            <input class="form-control" placeholder="Consider meeting name">
+    <div [formGroup]="boardForm" class="plr0 mlr0">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <label class="board-title">Enter a board title</label>
+                <input class="form-control" placeholder="Consider meeting name" formControlName="boardName">
+                <div class="error-message" *ngIf="isSubmitted && boardForm.get('boardName').errors">
+                    Board name is required.
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <label class="board-title">Choose a board type</label>
-            <app-cards [templateCollection]="cardTemplates" (templateChange)="templateSelectionChange($event)"></app-cards>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <label class="board-title">Choose a board type</label>
+                <div class="error-message" *ngIf="isSubmitted && !selectedCard">
+                    Board template is required.
+                </div>
+                <app-cards [templateCollection]="cardTemplates" (templateChange)="templateSelectionChange($event)"
+                           [style.error]="selectedCard === null"></app-cards>
+            </div>
         </div>
     </div>
     <div class="row pull-right">
         <div class="col-lg-12 col-md-12 col-sm-12 btn-group-create">
-            <button class="btn btn-primary crete-btn">Create</button>
-            <button class="btn btn-danger">Cancel</button>
+            <button class="btn btn-primary crete-btn" (click)="createNewBoard()">Create</button>
+            <button class="btn btn-danger" (click)="cancelBoard()">Cancel</button>
         </div>
     </div>
 </div>

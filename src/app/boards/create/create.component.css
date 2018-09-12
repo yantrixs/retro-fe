@@ -29,9 +29,11 @@
 :host ::ng-deep .ui-listbox-list-wrapper {
     width: 100%;
 }
+
 :host ::ng-deep .ui-listbox {
     width: 100%;
 }
+
 :host ::ng-deep .ui-listbox-list {
     width: 100%;
 }
@@ -46,4 +48,18 @@
 
 .crete-btn {
     margin-right: 10px;
+}
+
+.error-message {
+    color: red;
+    padding-top: 2px;
+    padding-left: 3px;
+    white-space: normal;
+}
+
+.error {
+    color: red;
+    padding-top: 2px;
+    padding-left: 3px;
+    white-space: normal;
 }

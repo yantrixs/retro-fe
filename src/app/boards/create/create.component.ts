@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RetroService} from '../../service/retro.service';
-import {Template} from '../../app.interface';
+import {NewBoard, Template} from '../../app.interface';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-create',
@@ -11,11 +12,16 @@ export class CreateComponent implements OnInit {
 
     public cardTemplates: Array<Template>;
     public selectedCard: Template;
+    public boardForm: FormGroup;
+    public isSubmitted = false;
 
-    constructor(private retroService: RetroService) {
+    constructor(private retroService: RetroService, private fb: FormBuilder) {
     }
 
     ngOnInit() {
+        this.boardForm = this.fb.group({
+            boardName: ['', [Validators.required, Validators.min(5)]]
+        });
         this.retroService.getBoardTemplates().subscribe((templates) => {
             // console.log('templates  ', templates);
             this.cardTemplates = templates['body'];
@@ -24,8 +30,15 @@ export class CreateComponent implements OnInit {
 
     }
 
-    public templateSelectionChange(template): void {
-        this.selectedCard = template;
+    public templateSelectionChange(template: Template): void {
+        if (template.code && template.code === 'custom') {
+            this.selectedCard = template;
+            if (template.cardCategories.length > 0) {
+
+            }
+        } else {
+            this.selectedCard = template;
+        }
     }
 
     private addCustomTemplate(): void {
@@ -36,5 +49,19 @@ export class CreateComponent implements OnInit {
         template.imageName = 'services.svg';
         template.cardCategories = [];
         this.cardTemplates.push(template);
+    }
+
+    public createNewBoard(): void {
+        this.isSubmitted = true;
+        if (this.boardForm.valid && this.selectedCard) {
+            const newBoardInfo: NewBoard = {} as NewBoard;
+            newBoardInfo.boardName = this.boardForm.value;
+            newBoardInfo.template = this.selectedCard;
+            console.log(' newBoardInfo ', newBoardInfo);
+        }
+    }
+
+    public cancelBoard(): void {
+        this.isSubmitted = false;
     }
 }

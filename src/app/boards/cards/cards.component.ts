@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CardCategory, Template} from '../../app.interface';
-import {FormArray, FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
+import {Template} from '../../app.interface';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-cards',
@@ -12,7 +12,6 @@ export class CardsComponent implements OnInit {
     @Input() templateCollection: Array<Template>;
     @Output() templateChange = new EventEmitter();
     public selectedTemplate: Template;
-    public cardCategories: Array<CardCategory>;
     public categoryForm: FormGroup;
     public categories: FormArray;
     public customColors = [
@@ -63,8 +62,12 @@ export class CardsComponent implements OnInit {
     }
 
     public selectedTemplateHandler(template: Template) {
-        this.selectedTemplate = template;
-        this.templateChange.emit(this.selectedTemplate);
+        if (template.code && template.code === 'custom') {
+
+        } else {
+            this.selectedTemplate = template;
+            this.templateChange.emit(this.selectedTemplate);
+        }
     }
 
     public addNewCategory() {

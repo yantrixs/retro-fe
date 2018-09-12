@@ -24,3 +24,8 @@ export interface CardCategory {
     description: string;
     color: string;
 }
+
+export interface NewBoard {
+    boardName: string;
+    template: Template;
+}
