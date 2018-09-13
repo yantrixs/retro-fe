@@ -18,7 +18,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private isUserLoggedIn = false;
     private subscription: Subscription;
 
-    constructor(private commonService: CommonService, private authService: AuthService, private router: Router) {
+    constructor(private commonService: CommonService, private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -34,9 +34,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
             }
             this.items = [];
             this.refreshItems();
-            if (!this.isUserLoggedIn) {
-                this.router.navigateByUrl('');
-            }
         });
 
         this.items = [

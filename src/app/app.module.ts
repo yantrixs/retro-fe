@@ -16,12 +16,15 @@ import {SpinnerService} from './service/spinner.service';
 import {ServiceInterceptor} from './service/service.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppCustomPreLoader} from './service/custom-preload.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavBarComponent,
         HomeComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         Ng2UiAuthModule.forRoot({
@@ -39,7 +42,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         FormsModule,
         BrowserAnimationsModule
     ],
-    providers: [AuthService, CommonService, SpinnerService, ServiceInterceptor,
+    providers: [AuthService, CommonService, SpinnerService, ServiceInterceptor, AppCustomPreLoader,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ServiceInterceptor,
