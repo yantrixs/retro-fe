@@ -62,10 +62,10 @@ export class CardsComponent implements OnInit {
     }
 
     public selectedTemplateHandler(template: Template) {
+        this.selectedTemplate = template;
         if (template.code && template.code === 'custom') {
 
         } else {
-            this.selectedTemplate = template;
             this.templateChange.emit(this.selectedTemplate);
         }
     }

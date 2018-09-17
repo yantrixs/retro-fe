@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RetroService} from '../../service/retro.service';
-import {NewBoard, Template} from '../../app.interface';
+import {Template, UserBoard} from '../../app.interface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
     public templateSelectionChange(template: Template): void {
         if (template.code && template.code === 'custom') {
             this.selectedCard = template;
-            if (template.cardCategories.length > 0) {
+            if (template.categories.length > 0) {
 
             }
         } else {
@@ -47,17 +47,20 @@ export class CreateComponent implements OnInit {
         template.name = 'Create your own board';
         template.description = 'Customize the column count and titles to make your very own retrospective board.';
         template.imageName = 'services.svg';
-        template.cardCategories = [];
+        template.categories = [];
         this.cardTemplates.push(template);
     }
 
     public createNewBoard(): void {
         this.isSubmitted = true;
         if (this.boardForm.valid && this.selectedCard) {
-            const newBoardInfo: NewBoard = {} as NewBoard;
-            newBoardInfo.boardName = this.boardForm.value;
-            newBoardInfo.template = this.selectedCard;
+            const newBoardInfo: UserBoard = {} as UserBoard;
+            newBoardInfo.title = this.boardForm.value;
+            newBoardInfo.categories = this.selectedCard.categories;
             console.log(' newBoardInfo ', newBoardInfo);
+            this.retroService.saveUserBoard(newBoardInfo).subscribe((resp) => {
+
+            });
         }
     }
 

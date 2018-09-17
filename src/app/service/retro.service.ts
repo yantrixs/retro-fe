@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Template, User} from '../app.interface';
+import {Template, User, UserBoard} from '../app.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -26,5 +26,9 @@ export class RetroService {
 
   public getBoardTemplates(): Observable<Array<Template>> {
       return this.httpClient.get<Array<Template>>(`${environment.API_URL}/templates`);
+  }
+
+  public saveUserBoard(board: UserBoard): Observable<any> {
+      return this.httpClient.post<any>(`${environment.API_URL}/board`, board);
   }
 }

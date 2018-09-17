@@ -1,10 +1,9 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/components/common/menuitem';
 import {AuthService} from 'ng2-ui-auth';
 import {Subscription} from 'rxjs';
 import {CommonService} from '../service/common.service';
 import {UserPayload} from '../app.interface';
-import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-nav-bar',

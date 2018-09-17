@@ -16,7 +16,7 @@ export interface Template {
     name: string;
     description: string;
     imageName: string;
-    cardCategories: Array<CardCategory>;
+    categories: Array<CardCategory>;
 }
 
 export interface CardCategory {
@@ -25,7 +25,7 @@ export interface CardCategory {
     color: string;
 }
 
-export interface NewBoard {
-    boardName: string;
-    template: Template;
+export interface UserBoard {
+    title: string;
+    categories: Array<CardCategory>;
 }

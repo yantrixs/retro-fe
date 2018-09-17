@@ -3,12 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppCustomPreLoader} from './service/custom-preload.service';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AuthGuardService} from './service/auth-guard.service';
+import {HomeComponent} from './home/home.component';
 
 const MODULE_ROUTES: Routes = [
     {
         path: '',
-        // component: HomeComponent,
-        redirectTo: 'auth',
+        component: HomeComponent,
         pathMatch: 'full'
     },
     {
