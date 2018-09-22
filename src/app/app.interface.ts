@@ -29,3 +29,17 @@ export interface UserBoard {
     title: string;
     categories: Array<CardCategory>;
 }
+
+export interface CardInfo {
+    id: number;
+    boarName: string;
+    boardTitle: string;
+    cardCategoryName: string;
+    memberEmail: string;
+    message: string;
+    likeCount: number;
+    likeMessage: string;
+    dislikeCount: string;
+    dislikeMessage: string;
+    date: string;
+}

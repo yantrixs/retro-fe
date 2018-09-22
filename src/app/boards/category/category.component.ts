@@ -4,10 +4,10 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-cards',
-    templateUrl: './cards.component.html',
-    styleUrls: ['./cards.component.css']
+    templateUrl: './category.component.html',
+    styleUrls: ['./category.component.css']
 })
-export class CardsComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
     @Input() templateCollection: Array<Template>;
     @Output() templateChange = new EventEmitter();

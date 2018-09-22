@@ -1,0 +1,12 @@
+<p-card>
+    <div class="row" [formGroup]="cardFormGroup">
+        <span class="close-icon" (click)="closeCard()" *ngIf="isCardAdded">x</span>
+        <textarea class="card-text-area" placeholder="what's on your mind" formControlName="cardMessage"></textarea>
+    </div>
+    <p-footer>
+        <button class="btn btn-primary pull-right btn-sm mr-6" *ngIf="isCardAdded" [disabled]="cardFormGroup.invalid"
+        (click)="addCard()">
+            Add
+        </button>
+    </p-footer>
+</p-card>

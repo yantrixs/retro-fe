@@ -2,6 +2,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {BoardsComponent} from './boards.component';
 import {ModuleWithProviders} from '@angular/core';
 import {CreateComponent} from './create/create.component';
+import {BoardCatalogComponent} from './board-catalog/board-catalog.component';
 
 const ROUTES: Routes = [
     {
@@ -11,6 +12,10 @@ const ROUTES: Routes = [
     {
         path: 'add',
         component: CreateComponent
+    },
+    {
+        path: 'board/:name',
+        component: BoardCatalogComponent
     }
 ];
 

@@ -24,7 +24,7 @@
                 <span class="boards-mine">Boards I created</span>
                 <a class="fa fa-plus-circle plus-icon" title="Create a new board" [routerLink]="['/boards/add']"></a>
             </div>
-            <app-user-boards></app-user-boards>
+            <app-user-boards [savedBoards]="savedUserBoards"></app-user-boards>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
 

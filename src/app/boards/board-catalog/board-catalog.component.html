@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row plr20">
+        <span class="board-title">{{userBoardInfo?.title}}</span>
+    </div>
+    <div class="row plr20">
+        <div *ngFor="let category of userBoardInfo?.cardCategories; let i = index" [attr.data-index]="i"
+             [style.width.%]="percentageValue" class="card-catalog">
+            <div class="col-lg-12 col-md-12 col-sm-12 card-title plr0" (click)="addNewCard(category, i)">
+                <span [style.color]="category.color">{{category.name}}</span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 card-body">
+                <app-card *ngIf="cardAssignList[i]?.cardCategoryName === category.name"
+                          [categoryName]="cardAssignList[i]?.cardCategoryName"
+                          (removeCard)="closeCard($event)" [isCardAdded]="true"
+                          (addNewCard)="addCard($event)"></app-card>
+            </div>
+        </div>
+    </div>
+</div>

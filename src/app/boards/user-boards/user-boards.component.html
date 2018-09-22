@@ -1,3 +1,25 @@
-<p>
-  user-boards works!
-</p>
+<div class="container board-container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12" id="headerInfo" *ngFor="let board of savedBoards; let i of index">
+            <div class="usr-board-catalog">
+                <div class="user-board-header">
+                    <div class="usr-board-header-item">
+                        <span><i class="fa fa-user usr-board-header-icon" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="usr-board-header-item">
+                        <span><i class="fa fa-trash usr-board-header-icon" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="usr-board-header-item">
+                        <div class="usr-ellipse-box" (click)="showDropItems()">
+                            <span><i class="fa fa-ellipsis-v usr-board-header-ellipse"></i></span>
+                            <app-drop-down [isOpen]="showDropDownItems" [dropDownList]="tableOptions"></app-drop-down>
+                        </div>
+                    </div>
+                </div>
+                <div class="usr-board-body">
+                    <span class="board-title" [routerLink]="['board', board.name]">{{board.title}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

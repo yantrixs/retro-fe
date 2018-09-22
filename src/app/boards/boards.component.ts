@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {RetroService} from '../service/retro.service';
 
 @Component({
     selector: 'app-boards',
@@ -7,12 +8,12 @@ import {Router} from '@angular/router';
     styleUrls: ['./boards.component.css']
 })
 export class BoardsComponent implements OnInit {
-
+    public savedUserBoards = [];
     public items = [];
     public retroOptions = [];
     public selectedOption;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private retroService: RetroService) {
     }
 
     ngOnInit() {
@@ -23,6 +24,15 @@ export class BoardsComponent implements OnInit {
             {name: 'Active', code: 'active'},
             {name: 'Archived', code: 'archived'},
         ];
+
+        this.retroService.getSavedUserBoards().subscribe((res) => {
+            this.savedUserBoards = res['body'].userOwnBoards;
+            console.log('this.savedUserBoards     ', this.savedUserBoards);
+        }, (err) => {
+            console.log('Error Message   ', err);
+        }, () => {
+            // complete action.
+        });
     }
 
     public addNewBoard(): void {

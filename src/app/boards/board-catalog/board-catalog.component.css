@@ -1,0 +1,30 @@
+.board-title {
+    font-size: 32px;
+    color: #1f4e79;
+}
+
+.card-title {
+    border: 1px solid #e6e6e6;
+    background-color: #337ab7;
+    margin-bottom: 0;
+    height: 50px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.card-title span {
+    line-height: 2.3;
+}
+
+.card-catalog {
+    margin: 0 10px 0 0;
+    border: 1px solid #c8c8c8;
+    height: 100%;
+    min-height: 400px;
+}
+.card-catalog .card-body {
+    background-color: #e9ebee;
+    height: 100%;
+    min-height: inherit;
+    padding: 5px;
+}
