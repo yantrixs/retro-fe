@@ -1,12 +1,33 @@
-<p-card>
+<p-card *ngIf="isCardAdded">
     <div class="row" [formGroup]="cardFormGroup">
-        <span class="close-icon" (click)="closeCard()" *ngIf="isCardAdded">x</span>
+        <span class="close-icon" (click)="closeCard()">x</span>
         <textarea class="card-text-area" placeholder="what's on your mind" formControlName="cardMessage"></textarea>
     </div>
     <p-footer>
-        <button class="btn btn-primary pull-right btn-sm mr-6" *ngIf="isCardAdded" [disabled]="cardFormGroup.invalid"
-        (click)="addCard()">
+        <button class="btn btn-primary pull-right btn-sm mr-6" [disabled]="cardFormGroup.invalid"
+                (click)="addCard()">
             Add
         </button>
     </p-footer>
+</p-card>
+
+<p-card *ngFor="let savedCard of savedMemberCards; let i = index" [attr.data-index]="i">
+    <div [formGroup]="savedMemberGroup">
+        <div class="row" >
+            <div class="card-badge">
+                <span class="card-abbreviation">{{savedCard.memberAbbreviation}}</span>
+            </div>
+            <div>
+                <span class="card-member">{{savedCard.memberName}}</span>
+            </div>
+        </div>
+        <div class="row card-message-body">
+            <span class="card-message">{{savedCard.message}}</span>
+        </div>
+    </div>
+    <div class="row card-message-body">
+        <span class="fa fa-thumbs-up thumb-icon"></span>
+        <span class="fa fa-thumbs-down thumb-icon"></span>
+        <span class="pull-right">{{savedCard.cardDate}}</span>
+    </div>
 </p-card>

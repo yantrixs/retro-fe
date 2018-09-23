@@ -9,7 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {MenubarModule} from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
-import {InputTextModule} from 'primeng/primeng';
+import {InputTextModule, MessageService} from 'primeng/primeng';
 import {HomeComponent} from './home/home.component';
 import {CommonService} from './service/common.service';
 import {SpinnerService} from './service/spinner.service';
@@ -18,6 +18,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppCustomPreLoader} from './service/custom-preload.service';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
     declarations: [
@@ -40,9 +41,15 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
         ButtonModule,
         InputTextModule,
         FormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ToastModule
     ],
-    providers: [AuthService, CommonService, SpinnerService, ServiceInterceptor, AppCustomPreLoader,
+    providers: [AuthService,
+        CommonService,
+        SpinnerService,
+        ServiceInterceptor,
+        AppCustomPreLoader,
+        MessageService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ServiceInterceptor,

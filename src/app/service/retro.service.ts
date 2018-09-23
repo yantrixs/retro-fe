@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Template, User, UserBoard} from '../app.interface';
+import {CardInfo, Template, User, UserBoard} from '../app.interface';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -39,5 +39,13 @@ export class RetroService {
 
     public getBoardDetails(name): Observable<any> {
         return this.httpClient.get<any>(`${environment.API_URL}/board/${name}`);
+    }
+
+    public saveMemberCard(cardInfo: CardInfo): Observable<CardInfo> {
+        return this.httpClient.post<CardInfo>(`${environment.API_URL}/card`, cardInfo);
+    }
+
+    public getUserBoardCards(name: string): Observable<Array<CardInfo>> {
+        return this.httpClient.get<Array<CardInfo>>(`${environment.API_URL}/cards/${name}`);
     }
 }

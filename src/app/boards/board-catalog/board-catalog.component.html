@@ -8,11 +8,14 @@
             <div class="col-lg-12 col-md-12 col-sm-12 card-title plr0" (click)="addNewCard(category, i)">
                 <span [style.color]="category.color">{{category.name}}</span>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 card-body">
+            <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="isAddNewCard">
                 <app-card *ngIf="cardAssignList[i]?.cardCategoryName === category.name"
                           [categoryName]="cardAssignList[i]?.cardCategoryName"
                           (removeCard)="closeCard($event)" [isCardAdded]="true"
                           (addNewCard)="addCard($event)"></app-card>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="memberCards?.length > 0">
+                <app-card *ngIf="memberCards[i]?.cardCategoryName === category.name" [savedMemberCards]="memberCards"></app-card>
             </div>
         </div>
     </div>

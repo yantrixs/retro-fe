@@ -5,5 +5,7 @@
 <div class="app-div">
     <router-outlet>
         <div *ngIf="showLoader" class="loading"></div>
+        <p-toast key="serviceSuccess" position="bottom-left"></p-toast>
+        <p-toast key="serviceFail" position="bottom-left"></p-toast>
     </router-outlet>
 </div>

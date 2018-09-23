@@ -12,14 +12,19 @@ export class CardComponent implements OnInit {
     @Input() isCardAdded = false;
     @Output() removeCard = new EventEmitter();
     @Output() addNewCard = new EventEmitter();
+    @Input() savedMemberCards: Array<CardInfo> = [];
     public cardFormGroup: FormGroup;
-
+    public savedMemberGroup: FormGroup;
     constructor(private fb: FormBuilder) {
     }
 
     ngOnInit() {
         this.cardFormGroup = this.fb.group({
             cardMessage: ['', [Validators.required, Validators.minLength(2)]]
+        });
+
+        this.savedMemberGroup = this.fb.group({
+
         });
     }
 

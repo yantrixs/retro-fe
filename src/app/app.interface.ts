@@ -32,14 +32,16 @@ export interface UserBoard {
 
 export interface CardInfo {
     id: number;
-    boarName: string;
+    boardName: string;
     boardTitle: string;
     cardCategoryName: string;
     memberEmail: string;
+    memberName: string;
+    memberAbbreviation: string;
     message: string;
     likeCount: number;
     likeMessage: string;
     dislikeCount: string;
     dislikeMessage: string;
-    date: string;
+    cardDate: string;
 }
