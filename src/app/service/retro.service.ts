@@ -3,6 +3,7 @@ import {CardInfo, Template, User, UserBoard} from '../app.interface';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {st} from '@angular/core/src/render3';
 
 @Injectable({
     providedIn: 'root'
@@ -47,5 +48,9 @@ export class RetroService {
 
     public getUserBoardCards(name: string): Observable<Array<CardInfo>> {
         return this.httpClient.get<Array<CardInfo>>(`${environment.API_URL}/cards/${name}`);
+    }
+
+    public getSharedUrl(name: string): Observable<string> {
+        return this.httpClient.get<string>(`${environment.API_URL}/${name}/token`);
     }
 }

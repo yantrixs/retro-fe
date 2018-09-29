@@ -1,6 +1,7 @@
 .board-title {
     font-size: 32px;
     color: #1f4e79;
+    padding-left: 0;
 }
 
 .card-title {
@@ -19,12 +20,93 @@
 .card-catalog {
     margin: 0 10px 0 0;
     border: 1px solid #c8c8c8;
+    background-color: #e9ebee;
     height: 100%;
     min-height: 400px;
 }
+
 .card-catalog .card-body {
     background-color: #e9ebee;
     height: 100%;
-    min-height: inherit;
     padding: 5px;
+}
+
+.right-header {
+    display: inline-block;
+}
+
+.padding-info {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.usr-ellipse-box {
+    margin-top: 10px;
+    height: 30px;
+    width: 25px;
+    background-color: #FFFFFF;
+    border: 1px solid #c8c8c8;
+    margin-right: 5px;
+}
+
+.usr-ellipse-box:hover {
+    cursor: pointer;
+
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.usr-board-header-ellipse {
+    position: absolute;
+    right: 31px;
+    top: 16px;
+}
+
+p-dialog /deep/ .ui-dialog-titlebar {
+    background-color: rgb(63, 81, 181);
+    height: 60px;
+}
+
+p-dialog /deep/ .ui-dialog-title {
+    color: white;
+    font-size: 24px;
+}
+
+p-dialog /deep/ .ui-dialog-titlebar-close {
+    font-size: 24px;
+    color: white !important;
+}
+
+.padding16 {
+    padding: 16px;
+}
+
+.dialog-body-content {
+    font-size: 20px;
+}
+
+.manage-board-info {
+    color: #32b0ff;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.manage-board-info:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.txt-muted {
+    color: #777;
+    font-size: 15px;
+    padding-bottom: 10px;
+}
+
+p-button /deep/ .ui-button {
+    height: 38px;
+}
+
+.btn-suc {
+    height: 38px;
 }

@@ -12,6 +12,7 @@ import {ListboxModule} from 'primeng/listbox';
 import {BoardCatalogComponent} from './board-catalog/board-catalog.component';
 import {RetroDropComponent} from '../component/retro-drop.component';
 import {CardComponent} from './card/card.component';
+import { ManageMemberComponent } from './manage-member/manage-member.component';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import {CardComponent} from './card/card.component';
         CategoryComponent,
         BoardCatalogComponent,
         RetroDropComponent,
-        CardComponent
+        CardComponent,
+        ManageMemberComponent
     ]
 })
 export class BoardsModule {

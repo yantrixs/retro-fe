@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {RetroService} from '../../service/retro.service';
-import {CardCategory, CardInfo} from '../../app.interface';
+import {CardInfo} from '../../app.interface';
 import {AuthService} from 'ng2-ui-auth';
 import {MessageService} from 'primeng/api';
 import {Util} from '../../util/app.util';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-board-catalog',
@@ -19,6 +20,14 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
     public cardInfo: CardInfo;
     public memberCards: Array<CardInfo> = [];
     public isAddNewCard = false;
+    public showDropDownItems = false;
+    public isEnableNotification = false;
+    public displayShareModal = false;
+    public isURLCopied = false;
+    public tableOptions = [{
+        label: 'Edit'
+    }, {label: 'Delete'}, {label: 'Archive'}];
+    public shareFormGroup: FormGroup;
     private boardSubscription$: Subscription;
 
     private static getAbbreviation(username: string): string {
@@ -33,10 +42,14 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private retroService: RetroService,
                 private authService: AuthService,
-                private messageService: MessageService) {
+                private messageService: MessageService,
+                private fb: FormBuilder) {
     }
 
     public ngOnInit(): void {
+        this.shareFormGroup = this.fb.group({
+            sharedUrl: ['']
+        });
         const name = this.route.snapshot.paramMap.get('name');
         // console.log('Name   ', name, this.authService.getPayload());
         this.boardSubscription$ = this.retroService.getBoardDetails(name).subscribe((res) => {
@@ -52,7 +65,7 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
                 this.memberCards = res;
                 Util.showToastMessage('serviceSuccess', this.messageService);
             }, (err) => {
-                Util.showToastMessage('serviceFail', this.messageService, err);
+                Util.showToastMessage('serviceFail', this.messageService, err.message);
             });
         });
     }
@@ -89,7 +102,7 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
 
     public closeCard(card: string): void {
         this.cardAssignList.forEach((item, i) => {
-            if (item && item.name === card) {
+            if (item && item.cardCategoryName === card) {
                 this.cardAssignList.splice(i, 1);
                 this.cardAssignList.splice(i, 0, null);
                 this.isAddNewCard = false;
@@ -106,17 +119,55 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
         cardInfo.memberAbbreviation = BoardCatalogComponent.getAbbreviation(payload.username);
         cardInfo.memberEmail = payload.email;
         console.log('cardInfo   ', cardInfo);
-        this.retroService.saveMemberCard(cardInfo).subscribe((res) => {
+        this.boardSubscription$ = this.retroService.saveMemberCard(cardInfo).subscribe((res) => {
             console.log('Res   ', res);
             this.memberCards.push(res);
             this.isAddNewCard = false;
             Util.showToastMessage('serviceSuccess', this.messageService);
         }, (err) => {
-            Util.showToastMessage('serviceFail', this.messageService, err);
+            Util.showToastMessage('serviceFail', this.messageService, err.message);
         });
     }
 
     public ngOnDestroy(): void {
         this.boardSubscription$.unsubscribe();
+    }
+
+    public showDropItems(): void {
+        this.showDropDownItems = !this.showDropDownItems;
+    }
+
+    public refreshDropDownFlag(): void {
+        this.showDropDownItems = !this.showDropDownItems;
+    }
+
+    public enableNotification(): void {
+        this.isEnableNotification = !this.isEnableNotification;
+    }
+
+    public shareBoardLink(): void {
+        this.boardSubscription$ = this.retroService.getSharedUrl(this.userBoardInfo.name).subscribe((res) => {
+            const urlTxt = 'http://localhost:4200/boards/board/' + this.userBoardInfo.name + '?token=' + res['body'];
+            this.shareFormGroup.get('sharedUrl').setValue(urlTxt);
+            Util.showToastMessage('serviceSuccess', this.messageService);
+        }, (err) => {
+            Util.showToastMessage('serviceFail', this.messageService, err.message);
+        }, () => {
+            this.displayShareModal = true;
+        });
+    }
+
+    public tokenCopy(): void {
+        const url = this.shareFormGroup.get('sharedUrl').value;
+        const copyElement = document.createElement('textarea');
+        copyElement.style.position = 'fixed';
+        copyElement.style.opacity = '0';
+        copyElement.textContent = decodeURI(url);
+        const body = document.getElementsByTagName('body')[0];
+        body.appendChild(copyElement);
+        copyElement.select();
+        document.execCommand('copy');
+        body.removeChild(copyElement);
+        this.isURLCopied = true;
     }
 }

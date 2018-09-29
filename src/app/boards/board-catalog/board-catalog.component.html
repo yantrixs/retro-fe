@@ -1,6 +1,48 @@
-<div class="container-fluid">
-    <div class="row plr20">
-        <span class="board-title">{{userBoardInfo?.title}}</span>
+<div class="container-fluid pr-0">
+    <div class="row plr20 catalog-header">
+        <div class="col-lg-6 col-md-6 col-sm-6 pl-0 float-left">
+            <span class="board-title">{{userBoardInfo?.title}}</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="padding-info usr-ellipse-box float-right" (click)="showDropItems()">
+                <span><i class="fa fa-ellipsis-v usr-board-header-ellipse"></i></span>
+                <app-drop-down [isOpen]="showDropDownItems" [dropDownList]="tableOptions"
+                               (updateOpenFlag)="refreshDropDownFlag()"></app-drop-down>
+            </div>
+            <span class="float-right padding-info" *ngIf="isEnableNotification" (click)="enableNotification()">
+                <i class="fa fa-bell app-icon"></i>
+            </span>
+            <span class="float-right padding-info" *ngIf="!isEnableNotification" (click)="enableNotification()">
+                <i class="fa fa-bell-slash app-icon"></i>
+            </span>
+            <span class="float-right padding-info" (click)="shareBoardLink()"><i
+                class="fa fa-share-alt app-icon"></i></span>
+        </div>
+        <p-dialog header="Share Your Board" [(visible)]="displayShareModal" [modal]="true" [responsive]="true"
+                  [width]="750"
+                  [minWidth]="750" [minY]="70" [baseZIndex]="10000">
+            <div class="row padding16">
+                <div class="col-lg-12 col-md-12 col-sm-12 plr0">
+                    <span class="dialog-body-content">Add or invite anyone to your board by email address</span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 plr0">
+                    <span class="dialog-body-content manage-board-info" [routerLink]="['manageMember']">Manage Board Members</span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 pt-5 plr0">
+                    <span class="dialog-body-content">Add other users</span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 plr0 mb-2">
+                    <span class="txt-muted">Send this link to existing users to grant access to your board. The link is valid for 24 hours.</span>
+                </div>
+                <div class="col-lg-11 col-md-11 col-sm-11 plr0" [formGroup]="shareFormGroup">
+                    <input class="form-control" title="token info" readonly formControlName="sharedUrl">
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 plr0">
+                    <p-button *ngIf="!isURLCopied" icon="fa fa-lg fa-copy" (click)="tokenCopy()"></p-button>
+                    <button pButton type="button" *ngIf="isURLCopied" icon="fa fa-lg fa-check" class="ui-button-success btn-suc"></button>
+                </div>
+            </div>
+        </p-dialog>
     </div>
     <div class="row plr20">
         <div *ngFor="let category of userBoardInfo?.cardCategories; let i = index" [attr.data-index]="i"
@@ -8,14 +50,15 @@
             <div class="col-lg-12 col-md-12 col-sm-12 card-title plr0" (click)="addNewCard(category, i)">
                 <span [style.color]="category.color">{{category.name}}</span>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="isAddNewCard">
+            <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="isAddNewCard" id="appCard">
                 <app-card *ngIf="cardAssignList[i]?.cardCategoryName === category.name"
                           [categoryName]="cardAssignList[i]?.cardCategoryName"
                           (removeCard)="closeCard($event)" [isCardAdded]="true"
                           (addNewCard)="addCard($event)"></app-card>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="memberCards?.length > 0">
-                <app-card *ngIf="memberCards[i]?.cardCategoryName === category.name" [savedMemberCards]="memberCards"></app-card>
+            <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="memberCards?.length > 0" [style.top]="5">
+                <app-card *ngIf="memberCards[i]?.cardCategoryName === category.name"
+                          [savedMemberCards]="memberCards"></app-card>
             </div>
         </div>
     </div>

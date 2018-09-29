@@ -20,3 +20,15 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.app-icon {
+    font-size: 1.7em !important;
+    line-height: .75em;
+    vertical-align: 50%;
+    cursor: pointer;
+    color: #337ab7;
+}
+
+.app-icon:hover {
+    color: #0f4cb9;
+}
