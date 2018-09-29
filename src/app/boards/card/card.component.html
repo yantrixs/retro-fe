@@ -26,8 +26,10 @@
         </div>
     </div>
     <div class="row card-message-body">
-        <span class="fa fa-thumbs-up thumb-icon"></span>
+        <span class="fa fa-thumbs-up thumb-icon" (click)="clickOnUpThumb(savedCard)"></span>
+        <span *ngIf="isClickedOnLike">(1)</span>
         <span class="fa fa-thumbs-down thumb-icon"></span>
-        <span class="pull-right">{{savedCard.cardDate}}</span>
+        <span *ngIf="isClickedOnLike">(1)</span>
+        <span class="date-label">{{savedCard.cardDate | date : " dd MMM, yyyy"}}</span>
     </div>
 </p-card>

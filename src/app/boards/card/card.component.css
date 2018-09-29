@@ -71,7 +71,7 @@ p-card /deep/ .ui-card-footer {
 }
 
 .thumb-icon {
-    font-size: 24px;
+    font-size: 18px;
     padding-left: 5px;
     padding-right: 5px;
     cursor: pointer;
@@ -79,4 +79,10 @@ p-card /deep/ .ui-card-footer {
 
 .thumb-icon:hover {
     color: #225400;
+}
+
+.date-label {
+    position: absolute;
+    right: 1rem;
+    color: #b4b6b7;
 }

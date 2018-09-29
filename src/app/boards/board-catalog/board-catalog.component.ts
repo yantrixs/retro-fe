@@ -5,6 +5,7 @@ import {RetroService} from '../../service/retro.service';
 import {CardInfo} from '../../app.interface';
 import {AuthService} from 'ng2-ui-auth';
 import {MessageService} from 'primeng/api';
+import {Util} from '../../util/app.util';
 
 @Component({
     selector: 'app-board-catalog',
@@ -49,9 +50,9 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
             this.retroService.getUserBoardCards(name).subscribe((res) => {
                 console.log('Get User Board Cards    ', res);
                 this.memberCards = res;
-                this.messageService.add({key: 'serviceSuccess', severity: 'success', summary: 'Saved Cards'});
+                Util.showToastMessage('serviceSuccess', this.messageService);
             }, (err) => {
-                this.messageService.add({key: 'serviceFail', severity: 'error', summary: 'Saved Cards', detail: err.message});
+                Util.showToastMessage('serviceFail', this.messageService, err);
             });
         });
     }
@@ -109,9 +110,9 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
             console.log('Res   ', res);
             this.memberCards.push(res);
             this.isAddNewCard = false;
-            this.messageService.add({key: 'serviceSuccess', severity: 'success', summary: 'Saved Cards'});
+            Util.showToastMessage('serviceSuccess', this.messageService);
         }, (err) => {
-            this.messageService.add({key: 'serviceFail', severity: 'error', summary: 'Saved Cards', detail: err.message});
+            Util.showToastMessage('serviceFail', this.messageService, err);
         });
     }
 

@@ -15,6 +15,7 @@ export class CardComponent implements OnInit {
     @Input() savedMemberCards: Array<CardInfo> = [];
     public cardFormGroup: FormGroup;
     public savedMemberGroup: FormGroup;
+    public isClickedOnLike = false;
     constructor(private fb: FormBuilder) {
     }
 
@@ -37,5 +38,11 @@ export class CardComponent implements OnInit {
         cardInfo.cardCategoryName = this.categoryName;
         cardInfo.message = this.cardFormGroup.value.cardMessage;
         this.addNewCard.emit(cardInfo);
+    }
+
+    public clickOnUpThumb(card: CardInfo): void {
+        // card.li
+        this.isClickedOnLike = true;
+
     }
 }

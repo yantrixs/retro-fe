@@ -59,7 +59,7 @@ export class CreateComponent implements OnInit {
             newBoardInfo.categories = this.selectedCard.categories;
             console.log(' newBoardInfo ', newBoardInfo);
             this.retroService.saveUserBoard(newBoardInfo).subscribe((resp) => {
-
+                console.log('Response is ', resp);
             });
         }
     }

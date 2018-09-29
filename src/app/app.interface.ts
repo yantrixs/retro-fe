@@ -45,3 +45,18 @@ export interface CardInfo {
     dislikeMessage: string;
     cardDate: string;
 }
+
+export interface BoardMember {
+    email: string;
+    name: string;
+}
+
+export interface Votes {
+    boardMember: BoardMember;
+    id: number;
+    isLike: boolean;
+}
+
+export interface Vote {
+    id: number;
+}
