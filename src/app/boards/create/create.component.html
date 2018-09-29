@@ -24,7 +24,8 @@
                 <div class="error-message" *ngIf="isSubmitted && !selectedCard">
                     Board template is required.
                 </div>
-                <app-cards [templateCollection]="cardTemplates" (templateChange)="templateSelectionChange($event)"
+                <app-cards [templateCollection]="cardTemplates" [leftCardTemplate]="leftTemplate"
+                           [rightCardTemplate]="rightTemplate" (templateChange)="templateSelectionChange($event)"
                            [style.error]="selectedCard === null"></app-cards>
             </div>
         </div>

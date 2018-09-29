@@ -10,6 +10,8 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class CategoryComponent implements OnInit {
 
     @Input() templateCollection: Array<Template>;
+    @Input() leftCardTemplate: Array<Template>;
+    @Input() rightCardTemplate: Array<Template>;
     @Output() templateChange = new EventEmitter();
     public selectedTemplate: Template;
     public categoryForm: FormGroup;

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {RetroService} from '../../service/retro.service';
-import {CardInfo} from '../../app.interface';
+import {CardCategory, CardInfo} from '../../app.interface';
 import {AuthService} from 'ng2-ui-auth';
 import {MessageService} from 'primeng/api';
 import {Util} from '../../util/app.util';
@@ -47,7 +47,7 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
             console.log('Error info   ', err);
         }, () => {
             // get saved Cards
-            this.retroService.getUserBoardCards(name).subscribe((res) => {
+            this.boardSubscription$ = this.retroService.getUserBoardCards(name).subscribe((res) => {
                 console.log('Get User Board Cards    ', res);
                 this.memberCards = res;
                 Util.showToastMessage('serviceSuccess', this.messageService);
