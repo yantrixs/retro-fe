@@ -94,3 +94,19 @@
     color: #0d3e73;
     font-weight: 900;
 }
+.email-box {
+    background-color: #c8c8c8;
+    border-radius: 20px;
+    padding: 5px;
+    min-width: 100px;
+}
+
+.cross-icon {
+    font-size: 20px;
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+p-chips /deep/ .ui-chips-input-token {
+    display: none;
+}

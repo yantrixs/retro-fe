@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {CardInfo, Template, User, UserBoard} from '../app.interface';
+import {BoardMember, CardInfo, Template, User, UserBoard} from '../app.interface';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {st} from '@angular/core/src/render3';
 
 @Injectable({
     providedIn: 'root'
@@ -52,5 +51,9 @@ export class RetroService {
 
     public getSharedUrl(name: string): Observable<string> {
         return this.httpClient.get<string>(`${environment.API_URL}/${name}/token`);
+    }
+
+    public addNewMemberToBoard(boardMember: BoardMember, boardName: string): Observable<any> {
+        return this.httpClient.post<any>(`${environment.API_URL}/${boardName}/manageMembers`, boardMember);
     }
 }

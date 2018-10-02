@@ -22,12 +22,15 @@ export class Util {
     public static isValidEmails(email: string): EmailValidation {
         const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const validation = {} as EmailValidation;
+        validation.emailList = [];
         const emails = email.split(/[ ,;]+/);
         for (let i = 0; i < emails.length; i++) {
             if (emails[i] === '' || !regex.test(emails[i])) {
                 validation.invalidStr = emails[i];
                 validation.isValid = false;
                 return validation;
+            } else {
+                validation.emailList.push(emails[i]);
             }
         }
         validation.isValid = true;

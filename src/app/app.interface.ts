@@ -64,4 +64,18 @@ export interface Vote {
 export interface EmailValidation {
     isValid: boolean;
     invalidStr: string;
+    emailList: Array<string>;
+}
+
+export interface BoardMember {
+    id: number;
+    name: string;
+    abbreviation: string;
+    firstName: string;
+    lastName: string;
+    fullName: string;
+    emailAddress: string;
+    isBoardOwner: string;
+    isActive: string;
+    canContribute: boolean;
 }

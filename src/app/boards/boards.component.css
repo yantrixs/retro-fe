@@ -40,4 +40,5 @@
 
 .plus-icon:hover {
     color: #7fbe0c;
+    cursor: pointer;
 }

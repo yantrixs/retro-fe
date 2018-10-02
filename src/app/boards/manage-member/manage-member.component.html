@@ -28,15 +28,24 @@
                 <span class="add-member-header-txt">Add Members</span>
             </div>
             <div class="col-sm-12 plr0">
-                <span class="add-member-sub-txt">Enter the email addresses of the people you’d like to add to your board. Email address can be separated by semicolons, spaces or commas.</span>
+                <span class="add-member-sub-txt">Enter the email addresses of the people you’d
+                    like to add to your board. Email address can be separated by semicolons, spaces or commas.</span>
             </div>
             <br>
             <div class="col-sm-12 mt-3 plr0" [formGroup]="inviteMemberGroup">
                 <input class="form-control" title="enter email" placeholder="Type an email address and press enter"
-                       formControlName="memberEmail" type="email" [email]="true">
+                       formControlName="memberEmail" type="email" appAutoFocus required>
                 <small class="text text-danger" *ngIf="isSubmitted && inviteMemberGroup.get('memberEmail')?.errors">
                     Enter valid Email address can be separated by semicolons, spaces or commas
                 </small>
+                <hr class="mt-lg-2" *ngIf="emailList?.length === 0"/>
+            </div>
+            <div class="col-sm-12 plr0 mt-lg-2" *ngIf="emailList?.length > 0">
+                <!--<div class="email-box col-sm-2" *ngFor="let email of emailList; let i = index" [attr.data-index]="i">
+                    <span>{{email}}</span>
+                    <span class="cross-icon">X</span>
+                </div>-->
+                <p-chips [(ngModel)]="emailList"></p-chips>
                 <hr class="mt-lg-2"/>
             </div>
             <div class="col-sm-12 plr0">

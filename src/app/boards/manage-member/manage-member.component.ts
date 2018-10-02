@@ -4,6 +4,7 @@ import {RetroService} from '../../service/retro.service';
 import {Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Util} from '../../util/app.util';
+import {BoardMember} from '../../app.interface';
 
 @Component({
     selector: 'app-manage-member',
@@ -19,6 +20,7 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
     public isSubmitted = false;
     public owner;
     public showEditPermission = false;
+    public emailList: Array<string> = [];
     public tableOptions = [
         {label: 'Add Members', isDivider: true},
         {label: 'Board'},
@@ -26,6 +28,7 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
         {label: 'Dashboard', isDivider: true},
         {label: 'Help'}];
     private boardSubscription$: Subscription;
+
     constructor(private activatedRouter: ActivatedRoute,
                 private retroService: RetroService,
                 private fb: FormBuilder,
@@ -70,12 +73,30 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
 
     public inviteMember(): void {
         this.isSubmitted = true;
-        const emailValidation = Util.isValidEmails(this.inviteMemberGroup.get('memberEmail').value);
-        if (!emailValidation.isValid) {
-            this.inviteMemberGroup.get('memberEmail').setErrors({'incorrect': true});
-        } else {
-            this.inviteMemberGroup.get('memberEmail').setErrors(null);
+        if (this.inviteMemberGroup.get('memberEmail').value === '' && this.emailList.length > 0) {
+            // call to service
+            const member = {} as BoardMember;
+            member.emailAddress = this.emailList.toString();
+            member.canContribute = true;
+            this.boardSubscription$ = this.retroService.addNewMemberToBoard(member, this.boardName).subscribe((res) => {
+               console.log('Manage Members Res  ', res);
+            }, (err) => {
+                console.log('Manage Members Res  ', err.message);
+            });
+            // console.log(this.emailList.toString());
+        } else if (this.inviteMemberGroup.get('memberEmail').value !== '') {
+            const emailValidation = Util.isValidEmails(this.inviteMemberGroup.get('memberEmail').value);
+            if (!emailValidation.isValid) {
+                this.inviteMemberGroup.get('memberEmail').setErrors({'incorrect': true});
+            } else {
+                this.inviteMemberGroup.get('memberEmail').setValue('');
+                this.inviteMemberGroup.get('memberEmail').setErrors(null);
+                for (const email of emailValidation.emailList) {
+                    this.emailList.push(email);
+                }
+            }
         }
+
     }
 
     public routeHandler(lbl: string): void {

@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {BoardsComponent} from './boards.component';
 import {BOARD_ROUTES} from './board.routes';
 import {ButtonModule} from 'primeng/button';
-import {CardModule, DialogModule, DropdownModule, SplitButtonModule} from 'primeng/primeng';
+import {CardModule, ChipsModule, DialogModule, DropdownModule, SplitButtonModule} from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CreateComponent} from './create/create.component';
 import {UserBoardsComponent} from './user-boards/user-boards.component';
@@ -13,6 +13,7 @@ import {BoardCatalogComponent} from './board-catalog/board-catalog.component';
 import {RetroDropComponent} from '../component/retro-drop.component';
 import {CardComponent} from './card/card.component';
 import { ManageMemberComponent } from './manage-member/manage-member.component';
+import {AutoFocusDirective} from '../directive/auto-focus.directive';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { ManageMemberComponent } from './manage-member/manage-member.component';
         ListboxModule,
         ReactiveFormsModule,
         DialogModule,
-        CardModule
+        CardModule,
+        ChipsModule
     ],
     declarations: [BoardsComponent,
         CreateComponent,
@@ -34,7 +36,8 @@ import { ManageMemberComponent } from './manage-member/manage-member.component';
         BoardCatalogComponent,
         RetroDropComponent,
         CardComponent,
-        ManageMemberComponent
+        ManageMemberComponent,
+        AutoFocusDirective
     ]
 })
 export class BoardsModule {
