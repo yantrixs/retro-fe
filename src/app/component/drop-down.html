@@ -1,6 +1,6 @@
 <div *ngIf="canOpenDropDown" class="drop-down-toggle">
     <ul class="drop-down-ul" *ngFor="let dropDownData of dropDownList">
-        <li class="drop-down-li">{{dropDownData.label}}</li>
+        <li class="drop-down-li" (click)="listHandler(dropDownData.label)">{{dropDownData.label}}</li>
         <li class="divider" role="separator" *ngIf="dropDownData.isDivider"></li>
     </ul>
 </div>

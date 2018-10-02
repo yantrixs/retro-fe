@@ -9,14 +9,15 @@ export class RetroDropComponent implements OnInit {
     @Input() dropDownList;
     @Input() isOpen = false;
     @Output() updateOpenFlag = new EventEmitter();
+    @Output() selectedLabelCallback = new EventEmitter();
     public canOpenDropDown = false;
 
     @HostListener('document:click', ['$event'])
     public clickOut(event): void {
         // console.log(event, '   srcElement  ', event.target.attributes.length);
-        if (this.isOpen && event.target.attributes.length === 2) {
+        if (this.isOpen && event.target.childNodes.length === 2 || event.target.childNodes.length === 0) {
             this.canOpenDropDown = this.isOpen;
-        } else if (this.isOpen && event.target.attributes.length > 2) {
+        } else if (this.isOpen && event.target.childNodes.length > 2) {
             this.canOpenDropDown = false;
             this.updateOpenFlag.emit();
         }
@@ -34,8 +35,7 @@ export class RetroDropComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    constructor(private eRef: ElementRef) {
-
+    public listHandler(label: string): void {
+        this.selectedLabelCallback.emit(label);
     }
-
 }

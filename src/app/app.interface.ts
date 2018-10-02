@@ -60,3 +60,8 @@ export interface Votes {
 export interface Vote {
     id: number;
 }
+
+export interface EmailValidation {
+    isValid: boolean;
+    invalidStr: string;
+}

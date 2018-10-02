@@ -1,3 +1,67 @@
-<p>
-  manage-member works!
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 col-md-11 col-sm-11 board-title-div">
+            <span class="board-title" [routerLink]="['../../', boardName]">{{boardTitle}}</span>
+            <span> board members</span>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <div class="usr-ellipse-box float-right" (click)="showDropItems()">
+                <span><i class="fa fa-ellipsis-v usr-board-header-ellipse"></i></span>
+                <app-drop-down [isOpen]="showDropDownItems" [dropDownList]="tableOptions"
+                               (updateOpenFlag)="refreshDropDownFlag()"
+                               (selectedLabelCallback)="routeHandler($event)"></app-drop-down>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-0">
+
+    <div class="row" *ngIf="!showAddMember">
+        <div class="col-lg-12 col-md-12 col-sm-12" (click)="addMember()">
+            <span class="add-member-header">Add Member</span>
+            <i class="fa fa-plus-circle fa-lg pad-left-lg"></i>
+        </div>
+    </div>
+
+    <div class="row mlr0" *ngIf="showAddMember">
+        <div class="col-sm-12 gray-box">
+            <div class="col-sm-12 plr0">
+                <span class="add-member-header-txt">Add Members</span>
+            </div>
+            <div class="col-sm-12 plr0">
+                <span class="add-member-sub-txt">Enter the email addresses of the people you’d like to add to your board. Email address can be separated by semicolons, spaces or commas.</span>
+            </div>
+            <br>
+            <div class="col-sm-12 mt-3 plr0" [formGroup]="inviteMemberGroup">
+                <input class="form-control" title="enter email" placeholder="Type an email address and press enter"
+                       formControlName="memberEmail" type="email" [email]="true">
+                <small class="text text-danger" *ngIf="isSubmitted && inviteMemberGroup.get('memberEmail')?.errors">
+                    Enter valid Email address can be separated by semicolons, spaces or commas
+                </small>
+                <hr class="mt-lg-2"/>
+            </div>
+            <div class="col-sm-12 plr0">
+                <div class="float-right">
+                    <button class="btn btn-primary mr-2" (click)="inviteMember()">Invite</button>
+                    <button class="btn btn-default" (click)="inviteCancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-11">
+            <span class="owner">{{owner?.fullName}}</span>
+        </div>
+        <div class="col-sm-1">
+            <span class="float-right">
+                <i class="fa fa-edit edit-icon"></i>
+            </span>
+        </div>
+        <div class="col-sm-12">
+            <span>{{owner?.email}}</span>
+        </div>
+    </div>
+    <div *ngIf="showEditPermission" class="col-sm-12">
+
+    </div>
+</div>
