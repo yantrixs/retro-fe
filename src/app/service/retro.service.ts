@@ -56,4 +56,12 @@ export class RetroService {
     public addNewMemberToBoard(boardMember: BoardMember, boardName: string): Observable<any> {
         return this.httpClient.post<any>(`${environment.API_URL}/${boardName}/manageMembers`, boardMember);
     }
+
+    public getBoardMembers(name: string): Observable<Array<BoardMember>> {
+        return this.httpClient.get<Array<BoardMember>>(`${environment.API_URL}/${name}/contactList`);
+    }
+
+    public removeBoardMember(name: string, id): Observable<any> {
+        return this.httpClient.delete(`${environment.API_URL}/${name}/manageMembers/${id}`);
+    }
 }

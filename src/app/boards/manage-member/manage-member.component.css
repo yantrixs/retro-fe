@@ -84,12 +84,13 @@
     line-height: 1.4;
 }
 
-.edit-icon {
+.font-icon {
     font-size: 21px;
     color: #337ab7;
+    padding-right: 5px;
 }
 
-.edit-icon:hover {
+.font-icon:hover {
     cursor: pointer;
     color: #0d3e73;
     font-weight: 900;

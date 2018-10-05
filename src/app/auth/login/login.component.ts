@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'ng2-ui-auth';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CommonService} from '../../service/common.service';
 
 @Component({
@@ -12,9 +12,16 @@ import {CommonService} from '../../service/common.service';
 export class LoginComponent implements OnInit {
     public loginForm: FormGroup;
     public isSubmitted = false;
-
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,
+    private routerToken;
+    private boardName;
+    constructor(private fb: FormBuilder, private authService: AuthService,
+                private router: Router, private activatedRoute: ActivatedRoute,
                 private commonService: CommonService) {
+        this.activatedRoute.queryParams.subscribe(params => {
+            console.log(params);
+            this.routerToken = params.token;
+            this.boardName = params.boardName;
+        });
     }
 
     ngOnInit() {
@@ -33,7 +40,11 @@ export class LoginComponent implements OnInit {
             }, (error) => {
                 console.log('Error is', error);
             }, () => {
-                this.router.navigateByUrl('boards');
+                if (this.boardName) {
+                    this.router.navigateByUrl('boards/board', this.boardName);
+                } else {
+                    this.router.navigateByUrl('boards');
+                }
             });
         }
     }

@@ -21,6 +21,7 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
     public owner;
     public showEditPermission = false;
     public emailList: Array<string> = [];
+    public membersList: Array<BoardMember> = [];
     public tableOptions = [
         {label: 'Add Members', isDivider: true},
         {label: 'Board'},
@@ -44,9 +45,12 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
         this.boardSubscription$ = this.retroService.getBoardDetails(this.boardName).subscribe((res) => {
             this.boardTitle = res.title;
             this.owner = res.owner;
-            console.log('this.userBoardInfo    ', res);
+            this.membersList = res.boardMembers.filter(member => !member.boardOwner);
+            console.log('this.userBoardInfo    ', res, '    ', this.membersList);
         }, (err) => {
             console.log('Error info   ', err);
+        }, () => {
+            // this.getContactList();
         });
     }
 
@@ -79,9 +83,12 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
             member.emailAddress = this.emailList.toString();
             member.canContribute = true;
             this.boardSubscription$ = this.retroService.addNewMemberToBoard(member, this.boardName).subscribe((res) => {
-               console.log('Manage Members Res  ', res);
+                console.log('Manage Members Res  ', res);
             }, (err) => {
                 console.log('Manage Members Res  ', err.message);
+            }, () => {
+                this.getContactList();
+                this.emailList = [];
             });
             // console.log(this.emailList.toString());
         } else if (this.inviteMemberGroup.get('memberEmail').value !== '') {
@@ -96,7 +103,6 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
                 }
             }
         }
-
     }
 
     public routeHandler(lbl: string): void {
@@ -112,5 +118,24 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
                 this.router.navigate(['/boards']);
                 break;
         }
+    }
+
+    public deleteSelectedMember(member) {
+        this.boardSubscription$ = this.retroService.removeBoardMember(this.boardName, member.id).subscribe(() => {
+
+        }, (err) => {
+            console.log('Delete Member ', err.message);
+        }, () => {
+            this.getContactList();
+        });
+    }
+
+    private getContactList(): void {
+        this.boardSubscription$ = this.retroService.getBoardMembers(this.boardName).subscribe((res) => {
+            this.membersList = res['body'].filter(member => !member.boardOwner);
+            console.log('Board Members Res ', this.membersList);
+        }, (err) => {
+            console.log('Board Members Error  ', err.message);
+        });
     }
 }
