@@ -46,11 +46,6 @@ export interface CardInfo {
     cardDate: string;
 }
 
-export interface BoardMember {
-    email: string;
-    name: string;
-}
-
 export interface Votes {
     boardMember: BoardMember;
     id: number;
@@ -78,4 +73,5 @@ export interface BoardMember {
     isBoardOwner: string;
     isActive: string;
     canContribute: boolean;
+    mailSentSuccess: boolean;
 }

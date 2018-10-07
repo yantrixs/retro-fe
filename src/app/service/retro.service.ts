@@ -64,4 +64,8 @@ export class RetroService {
     public removeBoardMember(name: string, id): Observable<any> {
         return this.httpClient.delete(`${environment.API_URL}/${name}/manageMembers/${id}`);
     }
+
+    public sendMailToInActiveMember(member: BoardMember, name: string): Observable<any> {
+        return this.httpClient.post<any>(`${environment.API_URL}/${name}/sendMailToInActiveMember`, member);
+    }
 }

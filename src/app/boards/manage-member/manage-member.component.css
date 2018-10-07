@@ -87,14 +87,14 @@
 .font-icon {
     font-size: 21px;
     color: #337ab7;
-    padding-right: 5px;
 }
 
-.font-icon:hover {
+.font-icon:hover .font-close:hover {
     cursor: pointer;
     color: #0d3e73;
     font-weight: 900;
 }
+
 .email-box {
     background-color: #c8c8c8;
     border-radius: 20px;
@@ -110,4 +110,18 @@
 
 p-chips /deep/ .ui-chips-input-token {
     display: none;
+}
+
+.font-close {
+    font-size: 25px;
+    color: #337ab7;
+    cursor: pointer;
+    padding-left: 5px;
+    margin-top: -2px;
+}
+
+.font-close:hover {
+    cursor: pointer;
+    color: #0d3e73;
+    font-weight: 900;
 }

@@ -22,6 +22,8 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
     public showEditPermission = false;
     public emailList: Array<string> = [];
     public membersList: Array<BoardMember> = [];
+    public deleteMember: BoardMember;
+    public isMemberDeleteDialogShow = false;
     public tableOptions = [
         {label: 'Add Members', isDivider: true},
         {label: 'Board'},
@@ -120,13 +122,31 @@ export class ManageMemberComponent implements OnInit, OnDestroy {
         }
     }
 
-    public deleteSelectedMember(member) {
-        this.boardSubscription$ = this.retroService.removeBoardMember(this.boardName, member.id).subscribe(() => {
+    public deleteSelectedMember(member: BoardMember): void {
+        this.deleteMember = member;
+        this.isMemberDeleteDialogShow = true;
+    }
 
+    public cancelDeleteMember() {
+        this.isMemberDeleteDialogShow = false;
+        this.deleteMember = null;
+    }
+
+    public callDeleteMember() {
+        this.boardSubscription$ = this.retroService.removeBoardMember(this.boardName, this.deleteMember.id).subscribe(() => {
+            this.deleteMember = null;
         }, (err) => {
             console.log('Delete Member ', err.message);
         }, () => {
             this.getContactList();
+        });
+    }
+
+    public sendMailInActiveUser(member: BoardMember): void {
+        this.boardSubscription$ = this.retroService.sendMailToInActiveMember(member, this.boardName).subscribe(() => {
+            member.mailSentSuccess = true;
+        }, (err) => {
+            console.log('Board Members Error  ', err.message);
         });
     }
 

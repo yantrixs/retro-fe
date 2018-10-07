@@ -1,4 +1,19 @@
 <div class="container">
+    <p-dialog header="Delete Member" [(visible)]="isMemberDeleteDialogShow" [modal]="true" [responsive]="true"
+              [width]="550" [minWidth]="200" [minY]="70" [baseZIndex]="10000">
+        <div class="container">
+            <p class="mt-lg-3">Are you sure you want to remove board member "{{deleteMember?.fullName}}"?</p>
+            <p class="mt-lg-3 mb-lg-3">Removing the member prevents them from contributing to the board, but all cards previously added
+                to the board by "{{deleteMember?.fullName}}" will remain.</p>
+        </div>
+        <p-footer>
+            <button class="btn btn-primary btn-sm" (click)="callDeleteMember()">Yes</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelDeleteMember()" autofocus>No</button>
+        </p-footer>
+    </p-dialog>
+</div>
+
+<div class="container">
     <div class="row">
         <div class="col-lg-11 col-md-11 col-sm-11 board-title-div">
             <span class="board-title" [routerLink]="['../../', boardName]">{{boardTitle}}</span>
@@ -81,14 +96,24 @@
         </div>
         <div class="col-sm-1">
             <span class="float-right" (click)="deleteSelectedMember(member)">
-                <i class="fa fa-times font-icon"></i>
+                <i class="fa fa-times font-close"></i>
             </span>
-            <span class="float-right">
+            <span class="float-right" *ngIf="member.isActive">
                 <i class="fa fa-edit font-icon"></i>
+            </span>
+            <span class="float-right" *ngIf="!member.isActive && !member.mailSentSuccess"
+                  (click)="sendMailInActiveUser(member)">
+                <i class="fa fa-envelope font-icon"></i>
+            </span>
+            <span class="float-right" *ngIf="member.mailSentSuccess">
+                <i class="fa fa-check font-icon"></i>
             </span>
         </div>
         <div class="col-sm-12">
             <span>{{member?.emailAddress}}</span>
+        </div>
+        <div class="col-sm-12 mt-lg-3" *ngIf="member.canContribute">
+            <span class="pl-lg-5">Contribute to board</span>
         </div>
         <hr class="col-sm-12 plr0"/>
     </div>

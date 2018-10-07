@@ -32,3 +32,18 @@
 .app-icon:hover {
     color: #0f4cb9;
 }
+
+p-dialog /deep/ .ui-dialog-titlebar {
+    background-color: rgb(63, 81, 181) !important;
+    height: 60px;
+}
+
+p-dialog /deep/ .ui-dialog-title {
+    color: white;
+    font-size: 24px;
+}
+
+p-dialog /deep/ .ui-dialog-titlebar-close {
+    font-size: 24px;
+    color: white !important;
+}
