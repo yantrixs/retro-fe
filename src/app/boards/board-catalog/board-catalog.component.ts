@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {RetroService} from '../../service/retro.service';
-import {CardInfo} from '../../app.interface';
+import {CardInfo, Vote} from '../../app.interface';
 import {AuthService} from 'ng2-ui-auth';
 import {MessageService} from 'primeng/api';
 import {Util} from '../../util/app.util';
@@ -169,5 +169,19 @@ export class BoardCatalogComponent implements OnInit, OnDestroy {
         document.execCommand('copy');
         body.removeChild(copyElement);
         this.isURLCopied = true;
+    }
+
+    public addOrUpdateCardVote(card: CardInfo): void {
+        if (card.cardInfo) {
+            const vote: Vote = {} as Vote;
+            vote.isLiked = card.isLiked;
+            this.boardSubscription$ = this.retroService.updateVote(card.boardName, card.id, vote).subscribe((res) => {
+
+            }, (err) => {
+                console.log('Error Info ', err.message);
+            });
+        } else {
+            // delete card
+        }
     }
 }

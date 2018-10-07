@@ -54,7 +54,8 @@
                 <app-card *ngIf="cardAssignList[i]?.cardCategoryName === category.name"
                           [categoryName]="cardAssignList[i]?.cardCategoryName"
                           (removeCard)="closeCard($event)" [isCardAdded]="true"
-                          (addNewCard)="addCard($event)"></app-card>
+                          (addNewCard)="addCard($event)"
+                (addOrUpdateVote)="addOrUpdateCardVote($event)"></app-card>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 card-body" *ngIf="memberCards?.length > 0" [style.top]="5">
                 <app-card *ngIf="memberCards[i]?.cardCategoryName === category.name"

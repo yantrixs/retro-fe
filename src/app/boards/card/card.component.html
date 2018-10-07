@@ -11,25 +11,27 @@
     </p-footer>
 </p-card>
 
-<p-card *ngFor="let savedCard of savedMemberCards; let i = index" [attr.data-index]="i">
+<p-card *ngFor="let card of savedMemberCards; let i = index" [attr.data-index]="i">
     <div [formGroup]="savedMemberGroup">
-        <div class="row" >
+        <div class="row">
             <div class="card-badge">
-                <span class="card-abbreviation">{{savedCard.memberAbbreviation}}</span>
+                <span class="card-abbreviation">{{card.memberAbbreviation}}</span>
             </div>
             <div>
-                <span class="card-member">{{savedCard.memberName}}</span>
+                <span class="card-member">{{card.memberName}}</span>
             </div>
         </div>
         <div class="row card-message-body">
-            <span class="card-message">{{savedCard.message}}</span>
+            <span class="card-message">{{card.message}}</span>
         </div>
     </div>
     <div class="row card-message-body">
-        <span class="fa fa-thumbs-up thumb-icon" (click)="clickOnUpThumb(savedCard)"></span>
-        <span *ngIf="isClickedOnLike">(1)</span>
-        <span class="fa fa-thumbs-down thumb-icon"></span>
-        <span *ngIf="isClickedOnLike">(1)</span>
-        <span class="date-label">{{savedCard.cardDate | date : " dd MMM, yyyy"}}</span>
+        <span class="fa fa-thumbs-up thumb-icon" (click)="clickOnThumb(card, 'up')"
+              [ngStyle]="{'color': card.cardInfo && card.isLiked ? 'green' : '#225378' }"></span>
+        <span *ngIf="card.cardInfo && card.isLiked" class="mtl-3">(1)</span>
+        <span class="fa fa-thumbs-down thumb-icon" (click)="clickOnThumb(card, 'down')"
+              [ngStyle]="{'color': card.cardInfo && !card.isLiked ? 'red' : '#225378' }"></span>
+        <span *ngIf="card.cardInfo && !card.isLiked" class="mtl-3">(1)</span>
+        <span class="date-label">{{card.cardDate | date : " dd MMM, yyyy"}}</span>
     </div>
 </p-card>

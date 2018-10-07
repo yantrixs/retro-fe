@@ -39,21 +39,18 @@ export interface CardInfo {
     memberName: string;
     memberAbbreviation: string;
     message: string;
-    likeCount: number;
+    isLiked: boolean;
     likeMessage: string;
-    dislikeCount: string;
     dislikeMessage: string;
     cardDate: string;
-}
-
-export interface Votes {
-    boardMember: BoardMember;
-    id: number;
-    isLike: boolean;
+    cardInfo: any;
+    votes: Vote;
 }
 
 export interface Vote {
     id: number;
+    boardMember: BoardMember;
+    isLiked: boolean;
 }
 
 export interface EmailValidation {
@@ -75,3 +72,5 @@ export interface BoardMember {
     canContribute: boolean;
     mailSentSuccess: boolean;
 }
+
+

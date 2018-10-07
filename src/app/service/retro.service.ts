@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BoardMember, CardInfo, Template, User, UserBoard} from '../app.interface';
+import {BoardMember, CardInfo, Template, User, UserBoard, Vote} from '../app.interface';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -67,5 +67,9 @@ export class RetroService {
 
     public sendMailToInActiveMember(member: BoardMember, name: string): Observable<any> {
         return this.httpClient.post<any>(`${environment.API_URL}/${name}/sendMailToInActiveMember`, member);
+    }
+
+    public updateVote(name: string, cardId: number, vote: Vote): Observable<any> {
+        return this.httpClient.post<any>(`${environment.API_URL}/${name}/card/${cardId}/vote`, vote);
     }
 }

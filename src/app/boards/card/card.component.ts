@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CardInfo} from '../../app.interface';
+import {RetroService} from '../../service/retro.service';
 
 @Component({
     selector: 'app-card',
@@ -12,11 +13,13 @@ export class CardComponent implements OnInit {
     @Input() isCardAdded = false;
     @Output() removeCard = new EventEmitter();
     @Output() addNewCard = new EventEmitter();
+    @Output() addOrUpdateVote = new EventEmitter();
     @Input() savedMemberCards: Array<CardInfo> = [];
     public cardFormGroup: FormGroup;
     public savedMemberGroup: FormGroup;
-    public isClickedOnLike = false;
-    constructor(private fb: FormBuilder) {
+    private likedArr = [];
+
+    constructor(private fb: FormBuilder, private retroService: RetroService) {
     }
 
     ngOnInit() {
@@ -24,9 +27,7 @@ export class CardComponent implements OnInit {
             cardMessage: ['', [Validators.required, Validators.minLength(2)]]
         });
 
-        this.savedMemberGroup = this.fb.group({
-
-        });
+        this.savedMemberGroup = this.fb.group({});
     }
 
     public closeCard(): void {
@@ -40,9 +41,29 @@ export class CardComponent implements OnInit {
         this.addNewCard.emit(cardInfo);
     }
 
-    public clickOnUpThumb(card: CardInfo): void {
-        // card.li
-        this.isClickedOnLike = true;
+    public clickOnThumb(card: CardInfo, action: string): void {
+        const upIndex = this.likedArr.indexOf('up');
+        const downIndex = this.likedArr.indexOf('down');
+        if (action === 'up') {
+            card.isLiked = true;
+            if (upIndex >= 0) {
+                card.cardInfo = downIndex >= 0 ? card.cardInfo : null;
+                this.likedArr.splice(upIndex);
+            } else {
+                this.likedArr.push('up');
+                card.cardInfo = 'abc';
+            }
+        } else {
+            card.isLiked = false;
+            if (downIndex >= 0) {
+                card.cardInfo = upIndex >= 0 ? card.cardInfo : null;
+                this.likedArr.splice(downIndex);
+            } else {
+                this.likedArr.push('down');
+                card.cardInfo = 'abc';
+            }
+        }
 
+        this.addOrUpdateVote.emit(card);
     }
 }

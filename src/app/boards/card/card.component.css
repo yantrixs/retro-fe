@@ -86,3 +86,7 @@ p-card /deep/ .ui-card-footer {
     right: 1rem;
     color: #b4b6b7;
 }
+
+.mtl-3 {
+    margin-top: -3px;
+}
